@@ -1,6 +1,7 @@
 FROM python:3-alpine
 
-COPY app.py /app/app.py
+COPY . /app
+WORKDIR /app
 
 RUN python3 -m pip config --user set global.index-url https://pypi.org/simple \
     && python3 -m pip config --user set global.timeout 150 \
