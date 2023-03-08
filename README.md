@@ -1,6 +1,7 @@
 # slack-cr-reminder
 
 This is a bot, design send daily message for checking how may pepole will joining today code review.
+![screenshot-1.png](pics/screenshot-1.png)
 
 # Prepare
 

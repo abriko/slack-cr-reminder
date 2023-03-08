@@ -12,6 +12,7 @@ on:
 
     paths-ignore:
       - "README.md"
+      - pics/**
 
   # Run tests for any PRs.
   pull_request:
