@@ -18,5 +18,5 @@ docker run --pull always --name slack-cr-reminder -rm \
     -e SLACK_APP_TOKEN=xapp-123 \
     -e SLACK_BOT_TOKEN=xoxb-123 \
     -e CHANNEL_ID=c11 \
-    slack-cr-reminder:latest
+    ghcr.io/abriko/slack-cr-reminder:latest
 ```
