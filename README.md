@@ -19,5 +19,12 @@ docker run --pull always --name slack-cr-reminder -rm \
     -e SLACK_APP_TOKEN=xapp-123 \
     -e SLACK_BOT_TOKEN=xoxb-123 \
     -e CHANNEL_ID=c11 \
+    -e WATCH_TIME=600 \
     ghcr.io/abriko/slack-cr-reminder:latest
 ```
+
+Parameters:
+ - SLACK_APP_TOKEN, tokens.
+ - SLACK_BOT_TOKEN, tokens.
+ - CHANNEL_ID, channel id of message want to send.
+ - WATCH_TIME (unit second), time of bot waiting and send summary messages. 

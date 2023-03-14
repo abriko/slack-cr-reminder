@@ -8,6 +8,7 @@ from urllib import request
 
 app = AsyncApp(token=os.environ["SLACK_BOT_TOKEN"])
 channel_id = os.environ["CHANNEL_ID"]
+watch_time = int(os.environ.get("WATCH_TIME", 600))
 
 holiday_api_url = 'https://timor.tech/api/holiday/info/'
 reply_template = [
@@ -62,6 +63,7 @@ async def click_yes(ack, say, logger, body):
 # Send CR message to channel
 async def send_event():
     global topic_count
+    global watch_time
 
     await app.client.chat_postMessage(
         channel=channel_id,
@@ -78,7 +80,7 @@ async def send_event():
         ],
         text="Hey guys! Anything to say in today's CR? please please tell me~ 😇"
     )
-    await asyncio.sleep(60)
+    await asyncio.sleep(watch_time)
     if topic_count:
         await app.client.chat_postMessage(
             channel=channel_id,
