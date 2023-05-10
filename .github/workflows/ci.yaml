@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
-      contents: read
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -38,10 +38,19 @@ jobs:
             --label "runnumber=${GITHUB_RUN_ID}" \
             --label "org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}"
 
+      - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
+        uses: aquasecurity/trivy-action@master
+        with:
+          format: 'github'
+          output: 'dependency-results.sbom.json'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+          image-ref: ${{ env.IMAGE_NAME }}
+          github-pat: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log in to registry
         # This is where you will update the personal access token to GITHUB_TOKEN
-        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u $ --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
       - name: Push image
         run: |
